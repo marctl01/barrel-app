@@ -9,7 +9,7 @@ services:
     volumes:
       - ./backend:/var/www/html
     depends_on:
-      - db
+      - mysql
     networks:
       - barrel-app
 
@@ -24,13 +24,16 @@ services:
     networks:
       - barrel-app
 
-  db:
-    image: mysql:latest
+
+  mysql:
+    image: 'mysql:8.0'
     environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: barrel_app
-      MYSQL_USER: barrel_user
-      MYSQL_PASSWORD: barrel_password
+        - MYSQL_ROOT_PASSWORD=toor
+        - MYSQL_DATABASE=barrel_app
+        - MYSQL_USER=barrel_user
+        - MYSQL_PASSWORD=barrel_password
+    ports:
+        - '5002:3306'
     networks:
       - barrel-app
 
